@@ -10,6 +10,11 @@
 
     <!-- Tambahin disini.... -->
     <div class="ps-3 bg-light " style="width: 1080px; height: 617px" ;>
+      @if (session()->has('success'))
+        <div class="alert alert-success my-3">{{ session('success') }}</div>
+      @endif
+
+
       <div class="d-flex align-items-center">
         <h2>
           Data Monitoring
@@ -37,8 +42,8 @@
           <button type="button" class="btn btn-danger" style="margin-top: 15px; margin-right: 30px; margin-left: 15px;" ><i class="bi-file-pdf"></i> PDF </button>
           </button>
           <button type="button" class="btn btn-success" style="margin-top: 15px; margin-right: 30px; margin-left: 15px;"><i class="bi-file-excel"></i> Excel </button>
-          <div>
-
+          
+          <div class="mt-3">
             <table class="table table-striped border-top mx-3 mt-4" style="width: 1000px;" id="table">
               <thead>
                 <tr>
@@ -61,8 +66,12 @@
                     <td id="kondisi_id">{{$monitoring->kondisi_bts->nama}}</td>
                     <td id="surveyor_id">{{ $monitoring->user_surveyor->name }}</td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#myEdit1"><i class="bi-pencil-square"></i></button>
-                        <a href="../../functions/delete.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm me-3" onclick="return confirm('Anda yakin?');"><i class="bi-trash"></i></a>
+                        <button type="button" class="btn btn-primary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#myEdit1" data-id="{{ $monitoring->id }}" data-bts_id="{{ $monitoring->bts->id }}" data-surveyor_id="{{ $monitoring->user_surveyor->id }}" data-kondisi_id="{{ $monitoring->kondisi_bts->id }}" data-tahun="{{ $monitoring->tahun }}" data-tgl_kunjungan="{{ $monitoring->tgl_kunjungan }}"><i class="bi-pencil-square"></i></button>
+                        <form action="/monitoring/{{ $monitoring->id }}" method="post" class="d-inline">
+                          @csrf
+                          @method('delete')
+                          <button type="submit" class="btn btn-danger btn-sm me-3" onclick="return confirm('Anda yakin?');"><i class="bi-trash"></i></button>
+                        </form>
                         <a href="#" class="btn btn-success btn-sm "><i class="bi-arrow-right"></i></a>
                     </td>
                   </tr>
@@ -75,7 +84,7 @@
         </div>
 
         <!-- The Modal Edit -->
-        {{-- <div class="modal fade" id="myEdit1">
+        <div class="modal fade" id="myEdit1">
           <div class="modal-dialog">
             <div class="modal-content">
 
@@ -87,7 +96,9 @@
 
               <!-- Modal body -->
               <div class="modal-body">
-                <form method="post" action="../../functions/update.php">
+                <form method="post" action="/monitoring" id="modal-form">
+                  @csrf
+                  @method('put')
                   <input type="hidden" name="id" value="">
                   <div class="form-group">
                     <label>Tahun</label>
@@ -95,10 +106,10 @@
                   </div>
                   <div class="form-group">
                     <label for="bts" class="form-label">BTS</label>
-                    <select class="form-select" id="bts" name="bts" value="">
-                      <?php foreach ($dataBts as $row) : ?>
-                        <option value="<?= $row['id'] ?>"><?= $row['nama'] ?></option>
-                      <?php endforeach; ?>
+                    <select class="form-select" id="bts" name="bts_id" value="">
+                      @foreach ($data_bts as $row)
+                        <option value="{{ $row->id }}">{{ $row->nama }}</option>
+                      @endforeach
                     </select>
                   </div>
                   <div class="form-group">
@@ -107,20 +118,18 @@
                   </div>
                   <div class="form-group">
                     <label>Kondisi BTS</label>
-                    <select class="form-select" id="kondisi_bts" name="kondisi_bts" value="">
-                      <?php $kondisiBts = select("select * from kondisi_bts"); ?>
-                      <?php foreach ($kondisiBts as $row) : ?>
-                        <option value="<?= $row['id'] ?>"><?= $row['nama'] ?></option>
-                      <?php endforeach; ?>
+                    <select class="form-select" id="kondisi_bts" name="kondisi_bts_id" value="">
+                      @foreach ($data_kondisi_bts as $row)
+                        <option value="{{ $row->id }}">{{ $row->nama }}</option>
+                      @endforeach
                     </select>
                   </div>
                   <div class="form-group">
                     <label>Surveyor</label>
-                    <select class="form-select" id="surveyor" name="surveyor" value="">
-                      <?php $surveyor = select("select * from users"); ?>
-                      <?php foreach ($surveyor as $row) : ?>
-                        <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
-                      <?php endforeach; ?>
+                    <select class="form-select" id="surveyor" name="user_surveyor_id" value="">
+                      @foreach ($data_surveyor as $row)
+                        <option value="{{ $row->id }}">{{ $row->name }}</option>
+                      @endforeach
                     </select>
                   </div>
                   
@@ -136,24 +145,26 @@
 
             </div>
           </div>
-        </div> --}}
+        </div>
       </div>
 
   <script>
     $('#myEdit1').on('show.bs.modal', function(e) {
       var id = $(e.relatedTarget).data('id');
-      var tahun = $('#tahun').text();
+      var tahun = $(e.relatedTarget).data('tahun');
       var bts = $(e.relatedTarget).data('bts_id');
-      var tgl_kunjungan = $('#tgl_kunjungan').text();
+      var tgl_kunjungan = $(e.relatedTarget).data('tgl_kunjungan');
       var kondisi_id = $(e.relatedTarget).data('kondisi_id');
       var surveyor_id = $(e.relatedTarget).data('surveyor_id');
 
       $(e.currentTarget).find('input[name="id"]').val(id);
       $(e.currentTarget).find('input[name="tahun"]').val(tahun);
-      $(e.currentTarget).find('select[name="bts"]').val(bts);
+      $(e.currentTarget).find('select[name="bts_id"]').val(bts);
       $(e.currentTarget).find('input[name="tgl_kunjungan"]').val(tgl_kunjungan);
-      $(e.currentTarget).find('select[name="kondisi_bts"]').val(kondisi_id);
-      $(e.currentTarget).find('select[name="surveyor"]').val(surveyor_id);
+      $(e.currentTarget).find('select[name="kondisi_bts_id"]').val(kondisi_id);
+      $(e.currentTarget).find('select[name="user_surveyor_id"]').val(surveyor_id);
     });
   </script>
+
+  
 @endsection

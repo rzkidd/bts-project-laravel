@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bts;
+use App\Models\User;
+use App\Models\KondisiBts;
 use App\Models\Monitoring;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMonitoringRequest;
 use App\Http\Requests\UpdateMonitoringRequest;
 
@@ -13,9 +18,22 @@ class MonitoringController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->bts){
+            return view('dashboard.data.dataMonitoring', [
+                'monitorings' => Monitoring::where('bts_id', $request->bts)->get(),
+                'data_bts' => Bts::all(),
+                'data_kondisi_bts' => KondisiBts::all(),
+                'data_surveyor' => User::all()
+            ]);
+        }
+        return view('dashboard.data.dataMonitoring', [
+            'monitorings' => Monitoring::all(),
+            'data_bts' => Bts::all(),
+            'data_kondisi_bts' => KondisiBts::all(),
+            'data_surveyor' => User::all()
+        ]);
     }
 
     /**
@@ -62,18 +80,6 @@ class MonitoringController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMonitoringRequest  $request
-     * @param  \App\Models\Monitoring  $monitoring
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateMonitoringRequest $request, Monitoring $monitoring)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Monitoring  $monitoring
@@ -81,6 +87,8 @@ class MonitoringController extends Controller
      */
     public function destroy(Monitoring $monitoring)
     {
-        //
+        Monitoring::destroy($monitoring->id);
+
+        return redirect('/monitoring')->with('success', 'Data deleted!');
     }
 }

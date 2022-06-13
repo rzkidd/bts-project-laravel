@@ -24,7 +24,7 @@
                     <a href="../data/dataOperator.php" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top border-white">Show more <i class="bi bi-chevron-right "></i></a>
                 </div>
                 <div class="col-md-3 bg-warning d-flex flex-column rounded me-5 text-white">
-                    <h2 class="">10</h2>
+                    <h2 class="">{{ $jumlah_monitoring }}</h2>
                     <p class="pb-0 mb-0">Monitoring</p>
                     <a href="../data/dataMonitoring.php" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top border-white">Show more <i class="bi bi-chevron-right "></i></a>
                 </div>
