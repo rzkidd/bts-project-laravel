@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMonitoringRequest;
 use App\Http\Requests\UpdateMonitoringRequest;
+use App\Models\RecentActivity;
 
 class MonitoringController extends Controller
 {
@@ -87,6 +88,13 @@ class MonitoringController extends Controller
      */
     public function destroy(Monitoring $monitoring)
     {
+        $activity = [
+            'user_id' => auth()->user()->id,
+            'action' => 'delete',
+            'object' => 'monitoring on ' . $monitoring->bts->nama,
+        ];
+
+        RecentActivity::create($activity);
         Monitoring::destroy($monitoring->id);
 
         return redirect('/monitoring')->with('success', 'Data deleted!');

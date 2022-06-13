@@ -16,17 +16,17 @@
                 <div class="col-md-3 bg-success d-flex flex-column rounded me-5 text-white">
                     <h2 class="">10</h2>
                     <p class="pb-0 mb-0">BTS</p>
-                    <a href="../data/dataBTS.php" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top border-white">Show more <i class="bi bi-chevron-right "></i></a>
+                    <a href="/bts" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top border-white">Show more <i class="bi bi-chevron-right "></i></a>
                 </div>
                 <div class="col-md-3 bg-primary d-flex flex-column rounded me-5 text-white">
                     <h2 class="">10</h2>
                     <p class="pb-0 mb-0">Operator</p>
-                    <a href="../data/dataOperator.php" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top border-white">Show more <i class="bi bi-chevron-right "></i></a>
+                    <a href="/operator" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top border-white">Show more <i class="bi bi-chevron-right "></i></a>
                 </div>
                 <div class="col-md-3 bg-warning d-flex flex-column rounded me-5 text-white">
                     <h2 class="">{{ $jumlah_monitoring }}</h2>
                     <p class="pb-0 mb-0">Monitoring</p>
-                    <a href="../data/dataMonitoring.php" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top border-white">Show more <i class="bi bi-chevron-right "></i></a>
+                    <a href="/monitoring" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top border-white">Show more <i class="bi bi-chevron-right "></i></a>
                 </div>
 
             </div>
@@ -38,35 +38,29 @@
                             Recent Activity
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <p class="text-black-50">2022-04-04 16:23:24</p>
-                                <p class="mb-0"><i class="bi bi-plus-circle"></i> <a href="#" class="fw-bold text-decoration-none text-black" id="profileLink">Admin</a> add new BTS</p>
-                                <!-- hover card -->
-                                <div class="card collapse position-absolute" style="width: 14rem;" id="profileHover">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc3j_jlYp_6GSfnlumRrqQEfP2vdo_BF8h8A&usqp=CAU" class="card-img-top" alt="Profile Picture" style="width: 100%;">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Admin</h5>
-                                        <p class="card-text">admin@gmail.com</p>
-                                        <a href="#" class="btn btn-primary">Go to profile <i class="bi bi-arrow-right"></i></a>
+                            @foreach ($activities as $row)
+                                <li class="list-group-item">
+                                    <p class="text-black-50">{{ $row->at }}</p>
+                                    <p class="mb-0"><i class="bi 
+                                        @if ($row->action == 'add')
+                                            bi-plus-circle
+                                        @elseif ($row->action == 'edit')
+                                            bi-pencil-square
+                                        @elseif ($row->action == 'delete')
+                                            bi-trash
+                                        @endif 
+                                    "></i> <a href="#" class="fw-bold text-decoration-none text-black" id="profileLink">{{ $row->user->name }}</a> {{ $row->action }} {{  $row->object }}</p>
+                                    <!-- hover card -->
+                                    {{-- <div class="card collapse position-absolute" style="width: 14rem;" id="profileHover">
+                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc3j_jlYp_6GSfnlumRrqQEfP2vdo_BF8h8A&usqp=CAU" class="card-img-top" alt="Profile Picture" style="width: 100%;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $row->user->name }}</h5>
+                                            <p class="card-text">{{ $row->user->email }}</p>
+                                            <a href="#" class="btn btn-primary">Go to profile <i class="bi bi-arrow-right"></i></a>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="text-black-50">2022-04-04 16:23:24</p>
-                                <p class="mb-0"><i class="bi bi-pencil-square"></i> <span class="fw-bold">Admin</span> edit BTS-959</p>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="text-black-50">2022-04-04 16:23:24</p>
-                                <p class="mb-0"><i class="bi bi-pencil-square"></i> <span class="fw-bold">Kania Andriani</span> edit BTS-452</p>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="text-black-50">2022-04-04 16:23:24</p>
-                                <p class="mb-0"><i class="bi bi-plus-circle"></i> <span class="fw-bold">Jaya Situmorang M.Kom.</span> add new operator</p>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="text-black-50">2022-04-04 16:23:24</p>
-                                <p class="mb-0"><i class="bi bi-trash"></i> <span class="fw-bold">Admin</span> delete BTS-223</p>
-                            </li>
+                                </li> --}}
+                            @endforeach
                         </ul>
                     </div>
                 </div>

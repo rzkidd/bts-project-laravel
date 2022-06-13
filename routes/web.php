@@ -1,13 +1,15 @@
 <?php
 
-use Illuminate\Routing\RouteGroup;
+use App\Models\Monitoring;
 use Illuminate\Http\Request;
+use App\Models\RecentActivity;
+use Illuminate\Routing\RouteGroup;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MonitoringController;
-use App\Models\Monitoring;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +52,15 @@ Route::middleware(['auth'])->group(function () {
         ]);
 
         $validatedData['edited_by'] = auth()->user()->id;
+
+        $bts = DB::select("select nama from bts where id = $request->bts_id");
+        $activity = [
+            'user_id' => auth()->user()->id,
+            'action' => 'edit',
+            'object' => 'monitoring on ' . $bts[0]->nama
+        ];
+
+        RecentActivity::create($activity);
 
         Monitoring::where('id', $request->id)->update($validatedData);
 

@@ -35,14 +35,6 @@
     </main>
 
     <script>
-        $(document).ready(function() {
-            $('#profileLink').mousedown(function() {
-                $('#profileHover').toggle(500)
-                $('#profileHover').mouseleave(function() {
-                    $(this).hide(500)
-                })
-            });
-        })
         $(document).ready(function(){
             $('#table').DataTable();
         })

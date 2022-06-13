@@ -6,13 +6,15 @@ use App\Models\Bts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Monitoring;
+use App\Models\RecentActivity;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         return view('dashboard.index', [
-            'jumlah_monitoring' => Monitoring::all()->count()
+            'jumlah_monitoring' => Monitoring::all()->count(),
+            'activities' => RecentActivity::latest('at')->take(5)->get()
         ]);
     }
 

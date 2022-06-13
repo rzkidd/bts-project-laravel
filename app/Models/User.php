@@ -3,6 +3,13 @@
 namespace App\Models;
 
 use App\Models\Bts;
+use App\Models\FotoBts;
+use App\Models\Pemilik;
+use App\Models\Wilayah;
+use App\Models\JenisBts;
+use App\Models\KondisiBts;
+use App\Models\Monitoring;
+use App\Models\RecentActivity;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -116,5 +123,10 @@ class User extends Authenticatable
     public function edit_wilayah()
     {
         return $this->hasMany(Wilayah::class, 'edited_by');
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(RecentActivity::class, 'user_id');
     }
 }
