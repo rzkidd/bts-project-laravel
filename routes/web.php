@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
 
     // crud monitoring
     Route::resource('/monitoring', MonitoringController::class)->except('update');
+    Route::get('/chart', [MonitoringController::class, 'chart']);
     Route::put('/monitoring', function (Request $request) {
         $validatedData = $request->validate([
             'tahun' => 'required|min:4|max:4',
@@ -66,4 +67,5 @@ Route::middleware(['auth'])->group(function () {
 
         return redirect('/monitoring')->with('success', 'Data updated!');
     });
+
 });

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bts;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Monitoring;
+use Illuminate\Http\Request;
 use App\Models\RecentActivity;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {

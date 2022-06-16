@@ -1,37 +1,44 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
-        <div aria-label="breadcrumb" class="container py-2">
-            <ol class="breadcrumb">
+        <div aria-label="breadcrumb" class="container py-2 ">
+            <ol class="breadcrumb ">
                 <li class="breadcrumb-item"><a href="#" class=" text-black">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
             </ol>
         </div>
 
         <!-- Tambahin disini.... -->
-        <div class="container bg-light pb-5">
+        <div class="container  pb-5">
             <h3 class="">Welcome, Admin.</h3>
 
             <div class="row mt-3 ms-0">
-                <div class="col-md-3 bg-success d-flex flex-column rounded me-5 text-white">
-                    <h2 class="">10</h2>
-                    <p class="pb-0 mb-0">BTS</p>
-                    <a href="/bts" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top border-white">Show more <i class="bi bi-chevron-right "></i></a>
+                <div class="col-md-3 bg-white d-flex flex-column rounded me-5 text-white">
+                    <h2 class="text-dark">10</h2>
+                    <p class="pb-0 mb-0 text-dark">BTS</p>
+                    <a href="/bts" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top bg-primary">Show more <i class="bi bi-chevron-right "></i></a>
                 </div>
-                <div class="col-md-3 bg-primary d-flex flex-column rounded me-5 text-white">
-                    <h2 class="">10</h2>
-                    <p class="pb-0 mb-0">Operator</p>
-                    <a href="/operator" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top border-white">Show more <i class="bi bi-chevron-right "></i></a>
+                <div class="col-md-3 bg-white d-flex flex-column rounded me-5 text-white">
+                    <h2 class="text-dark">10</h2>
+                    <p class="pb-0 mb-0  text-dark">Operator</p>
+                    <a href="/operator" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top bg-primary">Show more <i class="bi bi-chevron-right "></i></a>
                 </div>
-                <div class="col-md-3 bg-warning d-flex flex-column rounded me-5 text-white">
-                    <h2 class="">{{ $jumlah_monitoring }}</h2>
-                    <p class="pb-0 mb-0">Monitoring</p>
-                    <a href="/monitoring" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top border-white">Show more <i class="bi bi-chevron-right "></i></a>
+                <div class="col-md-3 bg-white d-flex flex-column rounded me-5 text-white">
+                    <h2 class="text-dark">{{ $jumlah_monitoring }}</h2>
+                    <p class="pb-0 mb-0 text-dark">Monitoring</p>
+                    <a href="/monitoring" class="btn  my-2 text-decoration-none text-white d-flex justify-content-between border-top bg-primary">Show more <i class="bi bi-chevron-right "></i></a>
                 </div>
 
             </div>
 
-            <div class="row mt-5">
+            <div class="row mt-4 ms-0">
+                <div class="col-md-10 bg-white rounded">
+                    <h4 class="mt-2 mb-4">Monitoring</h4>
+                    <canvas id="monitoringChart" width="400" height="200" class="mb-3"></canvas>
+                </div>
+            </div>
+
+            <div class="row mt-3">
                 <div class="col-md-4 me-3">
                     <div class="card">
                         <div class="card-header bg-info fw-bold">
@@ -50,16 +57,6 @@
                                             bi-trash
                                         @endif 
                                     "></i> <a href="#" class="fw-bold text-decoration-none text-black" id="profileLink">{{ $row->user->name }}</a> {{ $row->action }} {{  $row->object }}</p>
-                                    <!-- hover card -->
-                                    {{-- <div class="card collapse position-absolute" style="width: 14rem;" id="profileHover">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc3j_jlYp_6GSfnlumRrqQEfP2vdo_BF8h8A&usqp=CAU" class="card-img-top" alt="Profile Picture" style="width: 100%;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $row->user->name }}</h5>
-                                            <p class="card-text">{{ $row->user->email }}</p>
-                                            <a href="#" class="btn btn-primary">Go to profile <i class="bi bi-arrow-right"></i></a>
-                                        </div>
-                                    </div>
-                                </li> --}}
                             @endforeach
                         </ul>
                     </div>
@@ -95,5 +92,57 @@
                     </div>
                 </div>
             </div>
+
+            
         </div>
+
+        
+        <script>
+            const url = '{{ url('/chart') }}';
+            const Tahun = new Array();
+            const Jumlah = new Array();
+
+            $(document).ready(function(){
+                $.get(url, function(response){
+                    response.forEach(function(data){
+                        Tahun.push(data.tahun);
+                        Jumlah.push(data.jumlah);
+                    });
+                    var jumlahMax = Math.max.apply(Math, Jumlah);
+                    var ctx = document.getElementById("monitoringChart").getContext('2d');
+                        var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: Tahun,
+                            datasets: [{
+                                label: 'Monitoring',
+                                data: Jumlah,
+                                borderWidth: 1,
+                                backgroundColor: 'rgba(13, 110, 253, 0.8)',
+                                barPercentage: 0.5
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxis: {
+                                    min: 0,
+                                    max: jumlahMax + 2
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+        {{-- <script>
+            const myChart = new Chart(
+                document.getElementById('monitoringChart'),
+                config
+            );
+        </script> --}}
 @endsection

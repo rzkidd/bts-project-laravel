@@ -49,7 +49,12 @@
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><a class="dropdown-item" href="/profile/change-password">Change Password</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                <li>
+                    <form action="/logout" method="post">
+                        @csrf
+                        <button type="submit" class="dropdown-item">Sign out</button>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>

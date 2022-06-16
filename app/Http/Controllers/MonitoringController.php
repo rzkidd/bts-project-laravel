@@ -7,10 +7,11 @@ use App\Models\User;
 use App\Models\KondisiBts;
 use App\Models\Monitoring;
 use Illuminate\Http\Request;
+use App\Models\RecentActivity;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMonitoringRequest;
 use App\Http\Requests\UpdateMonitoringRequest;
-use App\Models\RecentActivity;
 
 class MonitoringController extends Controller
 {
@@ -98,5 +99,11 @@ class MonitoringController extends Controller
         Monitoring::destroy($monitoring->id);
 
         return redirect('/monitoring')->with('success', 'Data deleted!');
+    }
+
+    public function chart()
+    {
+        $result = DB::select('select tahun, count(tahun) as jumlah from monitorings group by tahun');
+        return response()->json($result);
     }
 }

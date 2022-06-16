@@ -25,12 +25,15 @@
     {{-- DataTables --}}
     <link rel="stylesheet" type="text/css" href="js/DataTables/datatables.min.css"/>
     <script type="text/javascript" src="js/DataTables/datatables.min.js"></script>
+
+    {{-- Chart.js --}}
+    <script src="{{ asset('chart.js/chart.js') }}"></script>
 </head>
 
 <body>
     @include('dashboard.partials.sidebar')
 
-    <main class="flex-fill ms-4">
+    <main class="flex-fill ps-4">
         @yield('container')
     </main>
 

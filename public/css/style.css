@@ -19,6 +19,8 @@ main {
     position: absolute;
     left: 18vw;
     width: 80vw;
+    background-color: #dbdbdb;
+    min-height: 100vh;
 }
 
 .active-link {
