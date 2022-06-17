@@ -33,7 +33,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/signup', [SignupController::class, 'index']);
 Route::post('/signup', [SignupController::class, 'register']);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [DashboardController::class, 'index']);
     Route::get('/bts', [DashboardController::class, 'bts']);
     Route::get('/operator', [DashboardController::class, 'operator']);
