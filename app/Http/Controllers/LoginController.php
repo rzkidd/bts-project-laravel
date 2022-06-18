@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LoginLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -21,8 +22,13 @@ class LoginController extends Controller
         ]);
 
         if(Auth::attempt($credentials)){
-            $request->session()->regenerate();
+            $login = [
+                'user_id' => auth()->user()->id,
+                'is_online' => true
+            ];
+            LoginLog::create($login);
 
+            $request->session()->regenerate();
             return redirect()->intended();
         }
 
@@ -31,6 +37,10 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        $log = LoginLog::latest()->where('user_id', auth()->user()->id)->get();
+        $log[0]->is_online = false;
+        $log[0]->save();
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

@@ -62,32 +62,18 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="card">
+                <div class="col-md-4 h-100 d-flex flex-column" >
+                    <div class="card " style="min-height: 447px; max-height: 447px; overflow: scroll;">
                         <div class="card-header bg-info fw-bold">
-                            Last Login
+                            Online Users (last 30 minutes)
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <p class="text-black-50">2022-04-04 16:23:24</p>
-                                <p class="mb-0"><i class="bi bi-person-circle"></i> <span class="fw-bold">Admin</span></p>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="text-black-50">2022-04-04 16:23:24</p>
-                                <p class="mb-0"><i class="bi bi-person-circle"></i> <span class="fw-bold">Gina Vanesa Uyainah S.Psi</span></p>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="text-black-50">2022-04-04 16:23:24</p>
-                                <p class="mb-0"><i class="bi bi-person-circle"></i> <span class="fw-bold">Admin</span></p>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="text-black-50">2022-04-04 16:23:24</p>
-                                <p class="mb-0"><i class="bi bi-person-circle"></i> <span class="fw-bold">Kania Andriani</span></p>
-                            </li>
-                            <li class="list-group-item">
-                                <p class="text-black-50">2022-04-04 16:23:24</p>
-                                <p class="mb-0"><i class="bi bi-person-circle"></i> <span class="fw-bold">Jaya Situmorang M.Kom.</span></p>
-                            </li>
+                        <ul class="list-group list-group-flush mb-auto">
+                            @foreach ($online_users as $row)
+                                <li class="list-group-item">
+                                    <p class="mb-0"><i class="bi bi-person-circle"></i> <span class="fw-bold">{{ $row->user->name }}</span></p>
+                                </li>
+                            @endforeach
+                            
                         </ul>
                     </div>
                 </div>

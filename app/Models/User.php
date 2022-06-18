@@ -7,6 +7,7 @@ use App\Models\FotoBts;
 use App\Models\Pemilik;
 use App\Models\Wilayah;
 use App\Models\JenisBts;
+use App\Models\LoginLog;
 use App\Models\KondisiBts;
 use App\Models\Monitoring;
 use App\Models\RecentActivity;
@@ -128,5 +129,10 @@ class User extends Authenticatable
     public function activities()
     {
         return $this->hasMany(RecentActivity::class, 'user_id');
+    }
+
+    public function login_logs()
+    {
+        return $this->hasMany(LoginLog::class, 'user_id');
     }
 }
