@@ -1,5 +1,5 @@
 
-<nav class="">
+<nav>
     <div class="d-flex flex-column p-3 text-white bg-dark" style="width: 18vw; ">
         <a href="/bts-project" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <span class="fs-4">Aplikasi</span>
@@ -45,7 +45,7 @@
                 <strong class="ps-2">{{ auth()->user()->name }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(0px, -34px, 0px);" data-popper-placement="top-start">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="/profile">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><a class="dropdown-item" href="/profile/change-password">Change Password</a></li>
                 <li><hr class="dropdown-divider"></li>

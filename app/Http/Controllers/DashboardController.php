@@ -59,4 +59,14 @@ class DashboardController extends Controller
     {
         return view('dashboard.maps.MapsBTS');
     }
+
+    public function profile()
+    {
+        return view('dashboard.profile.index');
+    }
+
+    public function change_password()
+    {
+        return view('dashboard.profile.change_password');
+    }
 }

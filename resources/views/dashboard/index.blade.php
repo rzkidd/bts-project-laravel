@@ -9,7 +9,7 @@
         </div>
 
         <!-- Tambahin disini.... -->
-        <div class="container  pb-5">
+        <div class="container pb-5">
             <h3 class="">Welcome, Admin.</h3>
 
             <div class="row mt-3 ms-0">

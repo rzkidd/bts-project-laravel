@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Models\Monitoring;
 use Illuminate\Http\Request;
 use App\Models\RecentActivity;
@@ -39,6 +40,26 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/operator', [DashboardController::class, 'operator']);
     // Route::get('/monitoring', [DashboardController::class, 'monitoring']);
     Route::get('/maps', [DashboardController::class, 'maps']);
+    Route::get('/profile', [DashboardController::class, 'profile']);
+
+    // change password
+    Route::get('/profile/change-password', [DashboardController::class, 'change_password']);
+    Route::post('/profile/change-password', function (Request $request) {
+        $validatedData = $request->validate([
+            'password_old' => 'required|current_password',
+            'password' => 'required|min:4|max:12|confirmed',
+            'password_confirmation' => 'required_with:password|same:password'
+        ]);
+
+        $validatedData['password'] = bcrypt($validatedData['password']);
+        $toUpdate = [
+            'password' => $validatedData['password']
+        ];
+        User::where('id', auth()->user()->id)
+                ->update($toUpdate);
+
+        return redirect('/profile')->with('success', 'Password has been updated!');
+    });
 
     // crud monitoring
     Route::resource('/monitoring', MonitoringController::class)->except('update');
