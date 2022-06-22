@@ -8,12 +8,6 @@
         </ol>
     </div>
 
-    @if (session()->has('success'))
-        <div class="col-md-9 ">
-            <div class="alert alert-success">{{ session('success') }}</div>
-        </div>
-    @endif
-
     <div class="container">
         <h3 class="fw-bold mb-3">Profile</h3>
         <div class="row">
@@ -22,13 +16,16 @@
             </div>
             <div class="col-md-3 d-flex flex-column justify-content-center">
                 <h5 class="fw-bold">{{ auth()->user()->name }}</h5>
-                <div class="badge bg-success align-self-start">{{ ucfirst(auth()->user()->role) }}</div>
+                <p>{{ auth()->user()->role }}</p>
             </div>
         </div>
-        <form action="" class="form-group col-md-9 my-3">
+        <form action="/profile/edit" class="form-group col-md-9 my-3" method="POST">
+            @csrf
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control mb-2" value="{{ auth()->user()->name }}" name="name">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control disabled" value="{{ auth()->user()->email }}" disabled>
+            <input type="email" class="form-control mb-2" value="{{ auth()->user()->email }}" name="email">
+            <button type="submit" class="btn btn-primary mb-2">Update</button>
         </form>
-        <a href="/profile/edit" class="btn btn-primary">Edit Profile</a>
     </div>
 @endsection
