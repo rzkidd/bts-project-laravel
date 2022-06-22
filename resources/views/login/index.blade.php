@@ -32,7 +32,7 @@
 		@enderror
 
      	<button type="submit">Login</button>
-		 <a href="/signup" class="ca">Create an account</a>
+		 <a href="/signup" class="ca">Buat akun baru</a>
      </form>
 </body>
 </html>

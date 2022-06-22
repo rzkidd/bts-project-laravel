@@ -15,8 +15,8 @@
                <p class="success">{{ session('success') }}</p>
           @endif
 
-          <label>Name</label>
-          <input type="text" name="name" placeholder="Name" value="{{ old('name') }}" class="@error('name')
+          <label>Nama</label>
+          <input type="text" name="name" placeholder="Nama" value="{{ old('name') }}" class="@error('name')
                invalid
           @enderror">
           @error('name')
@@ -39,8 +39,8 @@
                <p class="invalid-feedback">{{ $message }}</p>
           @enderror
 
-          <label>Confirm Password</label>
-          <input type="password" name="password_confirmation" placeholder="Confirm Password" class="@error('password_confirmation')
+          <label>Konfirmasi Password</label>
+          <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" class="@error('password_confirmation')
                invalid
           @enderror">
           @error('password_confirmation')
@@ -48,7 +48,7 @@
           @enderror
 
      	<button type="submit">Sign Up</button>
-          <a href="/login" class="ca">Already have an account?</a>
+          <a href="/login" class="ca">Sudah punya akun?</a>
      </form>
 </body>
 </html>
