@@ -30,6 +30,11 @@
                 </div>
             </li>
             <li>
+                <a href="/kuesioner" class="nav-link text-white {{ Request::is('kuesioner') ? 'active' : '' }}">
+                    <i class="bi bi-journal-check"></i> Kuesioner
+                </a>
+            </li>
+            <li>
             <a href="/maps" class="nav-link text-white {{ Request::is('maps') ? 'active' : '' }}">
                 <i class="bi bi-pin-map"></i> Maps
             </a>

@@ -11,6 +11,7 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KuesionerController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\DashboardProfileController;
@@ -76,8 +77,12 @@ Route::middleware(['admin'])->group(function () {
         return redirect('/monitoring')->with('success', 'Data updated!');
     });
 
+    // CRUD Kuesioner
+    Route::resource('/kuesioner', KuesionerController::class);
+
     // API
     Route::get('/api/chart', [ApiController::class, 'chart']);
     Route::get('/api/monitoring/{id}', [ApiController::class, 'monitoring_data']);
+    Route::get('/api/kuesioner/{id}', [ApiController::class, 'kuesioner_data']);
 
 });

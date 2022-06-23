@@ -135,4 +135,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(LoginLog::class, 'user_id');
     }
+
+    public function create_kuesioner()
+    {
+        return $this->hasMany(Kuesioner::class, 'created_by');
+    }
+
+    public function edit_kuesioner()
+    {
+        return $this->hasMany(Kuesioner::class, 'edited_by');
+    }
+
+    public function create_jawaban_kuesioner()
+    {
+        return $this->hasMany(JawabanKuesioner::class, 'created_by');
+    }
+
+    public function edit_jawaban_kuesioner()
+    {
+        return $this->hasMany(JawabanKuesioner::class, 'edited_by');
+    }
 }
