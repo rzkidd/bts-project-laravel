@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardProfileController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\LandingpageController;
 
@@ -41,28 +42,14 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/maps', [DashboardController::class, 'maps']);
     Route::get('/profile', [DashboardController::class, 'profile']);
 
-    // change password
-    Route::get('/profile/change-password', [DashboardController::class, 'change_password']);
-    Route::post('/profile/change-password', function (Request $request) {
-        $validatedData = $request->validate([
-            'password_old' => 'required|current_password',
-            'password' => 'required|min:4|max:12|confirmed',
-            'password_confirmation' => 'required_with:password|same:password'
-        ]);
-
-        $validatedData['password'] = bcrypt($validatedData['password']);
-        $toUpdate = [
-            'password' => $validatedData['password']
-        ];
-        User::where('id', auth()->user()->id)
-                ->update($toUpdate);
-
-        return redirect('/profile')->with('success', 'Password has been updated!');
-    });
+    // Profile
+    Route::get('/profile/edit', [DashboardProfileController::class, 'edit']);
+    Route::post('/profile/edit', [DashboardProfileController::class, 'update_profile']);
+    Route::get('/profile/change-password', [DashboardProfileController::class, 'change_password']);
+    Route::post('/profile/change-password', [DashboardProfileController::class, 'update_password']);
 
     // crud monitoring
     Route::resource('/monitoring', MonitoringController::class)->except('update');
-    Route::get('/chart', [MonitoringController::class, 'chart']);
     Route::put('/monitoring', function (Request $request) {
         $validatedData = $request->validate([
             'tahun' => 'required|min:4|max:4',
@@ -87,5 +74,8 @@ Route::middleware(['admin'])->group(function () {
 
         return redirect('/monitoring')->with('success', 'Data updated!');
     });
+
+    // API
+    Route::get('/chart', [MonitoringController::class, 'chart']);
 
 });
