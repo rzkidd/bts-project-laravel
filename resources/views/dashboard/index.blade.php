@@ -84,7 +84,7 @@
 
         
         <script>
-            const url = '{{ url('/chart') }}';
+            const url = '{{ url('/api/chart') }}';
             const Tahun = new Array();
             const Jumlah = new Array();
 
@@ -125,10 +125,4 @@
                 });
             });
         </script>
-        {{-- <script>
-            const myChart = new Chart(
-                document.getElementById('monitoringChart'),
-                config
-            );
-        </script> --}}
 @endsection

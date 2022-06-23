@@ -9,7 +9,7 @@
     </div>
 
     <!-- Tambahin disini.... -->
-    <div class="ps-3 bg-light " style="width: 1080px; height: 617px" ;>
+    <div class="ps-3 bg-white rounded col-md-10" >
       @if (session()->has('success'))
         <div class="alert alert-success my-3">{{ session('success') }}</div>
       @endif
@@ -22,8 +22,8 @@
       </div>
 
       <!-- Select BTS -->
-      <div class="bg-white" style="margin-right: 15px; margin-left: 15px; height: 500px" ;>
-        <div class="pt-3 ps-3">
+      <div class="me-3" >
+        <div class="">
           <form action="#" method="get">
             <label for="bts" class="form-label">Select BTS</label>
             <select name="bts" id="bts" class="form-select" onchange="submit();">
@@ -39,12 +39,11 @@
         </div>
 
         <div>
-          <button type="button" class="btn btn-danger" style="margin-top: 15px; margin-right: 30px; margin-left: 15px;" ><i class="bi-file-pdf"></i> PDF </button>
-          </button>
-          <button type="button" class="btn btn-success" style="margin-top: 15px; margin-right: 30px; margin-left: 15px;"><i class="bi-file-excel"></i> Excel </button>
+          <button type="button" class="btn btn-danger mt-3 me-3" ><i class="bi-file-pdf"></i> PDF </button>
+          <button type="button" class="btn btn-success mt-3"><i class="bi-file-excel"></i> Excel </button>
           
-          <div class="mt-3">
-            <table class="table table-striped border-top mx-3 mt-4" style="width: 1000px;" id="table">
+          <div class="mt-3 mb-5 pb-3">
+            <table class="table table-striped mt-4 pb-3" id="table">
               <thead>
                 <tr>
                   <th >No</th>
@@ -65,8 +64,8 @@
                     <td id="tgl_kunjungan">{{ $monitoring->tgl_kunjungan }}</td>
                     <td id="kondisi_id">{{$monitoring->kondisi_bts->nama}}</td>
                     <td id="surveyor_id">{{ $monitoring->user_surveyor->name }}</td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#myEdit1" data-id="{{ $monitoring->id }}" data-bts_id="{{ $monitoring->bts->id }}" data-surveyor_id="{{ $monitoring->user_surveyor->id }}" data-kondisi_id="{{ $monitoring->kondisi_bts->id }}" data-tahun="{{ $monitoring->tahun }}" data-tgl_kunjungan="{{ $monitoring->tgl_kunjungan }}"><i class="bi-pencil-square"></i></button>
+                    <td class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-primary btn-sm me-3" data-bs-toggle="modal" data-bs-target="#myEdit1" data-id="{{ $monitoring->id }}"><i class="bi-pencil-square"></i></button>
                         <form action="/monitoring/{{ $monitoring->id }}" method="post" class="d-inline">
                           @csrf
                           @method('delete')
@@ -150,19 +149,24 @@
 
   <script>
     $('#myEdit1').on('show.bs.modal', function(e) {
-      var id = $(e.relatedTarget).data('id');
-      var tahun = $(e.relatedTarget).data('tahun');
-      var bts = $(e.relatedTarget).data('bts_id');
-      var tgl_kunjungan = $(e.relatedTarget).data('tgl_kunjungan');
-      var kondisi_id = $(e.relatedTarget).data('kondisi_id');
-      var surveyor_id = $(e.relatedTarget).data('surveyor_id');
+      var monitoring_id = $(e.relatedTarget).data('id');
+      const url = '{{ url('/api/monitoring') }}' + '/' + monitoring_id;
 
-      $(e.currentTarget).find('input[name="id"]').val(id);
-      $(e.currentTarget).find('input[name="tahun"]').val(tahun);
-      $(e.currentTarget).find('select[name="bts_id"]').val(bts);
-      $(e.currentTarget).find('input[name="tgl_kunjungan"]').val(tgl_kunjungan);
-      $(e.currentTarget).find('select[name="kondisi_bts_id"]').val(kondisi_id);
-      $(e.currentTarget).find('select[name="user_surveyor_id"]').val(surveyor_id);
+      $.get(url, function(response){
+        var id = response[0].id;
+        var tahun = response[0].tahun;
+        var bts = response[0].bts_id;
+        var tgl_kunjungan = response[0].tgl_kunjungan;
+        var kondisi_id = response[0].kondisi_bts_id;
+        var surveyor_id = response[0].user_surveyor_id;
+  
+        $(e.currentTarget).find('input[name="id"]').val(id);
+        $(e.currentTarget).find('input[name="tahun"]').val(tahun);
+        $(e.currentTarget).find('select[name="bts_id"]').val(bts);
+        $(e.currentTarget).find('input[name="tgl_kunjungan"]').val(tgl_kunjungan);
+        $(e.currentTarget).find('select[name="kondisi_bts_id"]').val(kondisi_id);
+        $(e.currentTarget).find('select[name="user_surveyor_id"]').val(surveyor_id);
+      });
     });
   </script>
 

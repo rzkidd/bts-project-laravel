@@ -29,6 +29,9 @@ class LoginController extends Controller
             LoginLog::create($login);
 
             $request->session()->regenerate();
+            if(auth()->user()->role == 'admin'){
+                return redirect('/admin');
+            }
             return redirect()->intended();
         }
 

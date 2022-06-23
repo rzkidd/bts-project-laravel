@@ -101,9 +101,5 @@ class MonitoringController extends Controller
         return redirect('/monitoring')->with('success', 'Data deleted!');
     }
 
-    public function chart()
-    {
-        $result = DB::select('select tahun, count(tahun) as jumlah from monitorings group by tahun');
-        return response()->json($result);
-    }
+    
 }

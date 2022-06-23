@@ -7,12 +7,13 @@ use App\Models\RecentActivity;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DashboardProfileController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\LandingpageController;
+use App\Http\Controllers\DashboardProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +61,9 @@ Route::middleware(['admin'])->group(function () {
         ]);
 
         $validatedData['edited_by'] = auth()->user()->id;
+        Monitoring::where('id', $request->id)->update($validatedData);
 
+        // Record activity
         $bts = DB::select("select nama from bts where id = $request->bts_id");
         $activity = [
             'user_id' => auth()->user()->id,
@@ -70,12 +73,11 @@ Route::middleware(['admin'])->group(function () {
 
         RecentActivity::create($activity);
 
-        Monitoring::where('id', $request->id)->update($validatedData);
-
         return redirect('/monitoring')->with('success', 'Data updated!');
     });
 
     // API
-    Route::get('/chart', [MonitoringController::class, 'chart']);
+    Route::get('/api/chart', [ApiController::class, 'chart']);
+    Route::get('/api/monitoring/{id}', [ApiController::class, 'monitoring_data']);
 
 });
