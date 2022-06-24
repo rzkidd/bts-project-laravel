@@ -56,7 +56,7 @@
                                         @elseif ($row->action == 'delete')
                                             bi-trash
                                         @endif 
-                                    "></i> <a href="#" class="fw-bold text-decoration-none text-black" id="profileLink">{{ $row->user->name }}</a> {{ $row->action }} {{  $row->object }}</p>
+                                    "></i> <a href="/profile/{{ $row->user->id }}" class="fw-bold text-decoration-none text-black" id="profileLink">{{ $row->user->name }}</a> {{ $row->action }} {{  $row->object }}</p>
                             @endforeach
                         </ul>
                     </div>
@@ -70,7 +70,7 @@
                         <ul class="list-group list-group-flush mb-auto">
                             @foreach ($online_users as $row)
                                 <li class="list-group-item">
-                                    <p class="mb-0"><i class="bi bi-person-circle"></i> <span class="fw-bold">{{ $row->user->name }}</span></p>
+                                    <a class="mb-0 text-decoration-none text-black" href="/profile/{{ $row->user->id }}"><i class="bi bi-person-circle"></i> <span class="fw-bold">{{ $row->user->name }}</span> </a>
                                 </li>
                             @endforeach
                             

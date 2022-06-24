@@ -15,6 +15,7 @@ use App\Http\Controllers\KuesionerController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\DashboardProfileController;
+use App\Http\Controllers\JawabanKuesionerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/profile', [DashboardController::class, 'profile']);
 
     // Profile
+    Route::get('/profile/{profile:id}', [DashboardProfileController::class, 'show']);
     Route::get('/profile/edit', [DashboardProfileController::class, 'edit']);
     Route::post('/profile/edit', [DashboardProfileController::class, 'update_profile']);
     Route::get('/profile/change-password', [DashboardProfileController::class, 'change_password']);
@@ -78,11 +80,18 @@ Route::middleware(['admin'])->group(function () {
     });
 
     // CRUD Kuesioner
-    Route::resource('/kuesioner', KuesionerController::class);
+    Route::get('/kuesioner', [DashboardController::class, 'kuesioner']);
+    Route::resource('/kuesioner', KuesionerController::class)->except('index');
+
+    // CRUD Jawaban Kuesioner
+    Route::post('/jawabankuesioner', [JawabanKuesionerController::class, 'store']);
+    Route::put('/jawabankuesioner/{jawabankuesioner:id}', [JawabanKuesionerController::class, 'update']);
+    Route::delete('/jawabankuesioner/{jawabankuesioner:id}', [JawabanKuesionerController::class, 'destroy']);
 
     // API
     Route::get('/api/chart', [ApiController::class, 'chart']);
     Route::get('/api/monitoring/{id}', [ApiController::class, 'monitoring_data']);
     Route::get('/api/kuesioner/{id}', [ApiController::class, 'kuesioner_data']);
+    Route::get('/api/jawabankuesioner/{id}', [ApiController::class, 'jawaban_kuesioner_data']);
 
 });

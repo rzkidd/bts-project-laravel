@@ -25,4 +25,10 @@ class ApiController extends Controller
         $result = DB::select("select id, pertanyaan from kuesioners where id = $request->id");
         return response()->json($result);
     }
+
+    public function jawaban_kuesioner_data(Request $request)
+    {
+        $result = DB::select("select id, nama from jawaban_kuesioners where id = $request->id");
+        return response()->json($result);
+    }
 }

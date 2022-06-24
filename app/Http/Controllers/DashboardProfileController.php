@@ -12,6 +12,13 @@ class DashboardProfileController extends Controller
         return view('dashboard.profile.index');
     }
 
+    public function show(User $profile)
+    {
+        return view('dashboard.profile.show', [
+            'profile' => $profile
+        ]);
+    }
+
     public function edit()
     {
         return view('dashboard.profile.edit');

@@ -7,20 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\RecentActivity;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\UpdateKuesionerRequest;
+use App\Models\JawabanKuesioner;
 
 class KuesionerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('dashboard.kuesioner.index', [
-            'kuesioners' => Kuesioner::all()
-        ]);
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -100,6 +90,7 @@ class KuesionerController extends Controller
 
         $validatedData['edited_by'] = auth()->user()->id;
 
+        // dd($kuesioner);
         Kuesioner::where('id', $kuesioner->id)
                     ->update($validatedData);
 
