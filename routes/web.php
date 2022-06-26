@@ -93,5 +93,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/api/monitoring/{id}', [ApiController::class, 'monitoring_data']);
     Route::get('/api/kuesioner/{id}', [ApiController::class, 'kuesioner_data']);
     Route::get('/api/jawabankuesioner/{id}', [ApiController::class, 'jawaban_kuesioner_data']);
+    Route::get('/api/locations', [ApiController::class, 'locations']);
 
 });

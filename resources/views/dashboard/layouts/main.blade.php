@@ -28,6 +28,10 @@
 
     {{-- Chart.js --}}
     <script src="{{ asset('chart.js/chart.js') }}"></script>
+
+    {{-- GMaps.js --}}
+    <script src="{{ asset('js/gmaps.min.js') }}"></script>
+    <script src="http://maps.google.com/maps/api/js"></script>
 </head>
 
 <body>

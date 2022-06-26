@@ -31,4 +31,10 @@ class ApiController extends Controller
         $result = DB::select("select id, nama from jawaban_kuesioners where id = $request->id");
         return response()->json($result);
     }
+
+    public function locations()
+    {
+        $location = DB::select('select nama, alamat, latitude, longitude from bts');
+        return response()->json($location);
+    }
 }
