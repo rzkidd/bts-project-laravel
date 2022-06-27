@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('foto_bts', function (Blueprint $table) {
-            $table->id();
-            $table->string('path_foto');
+        Schema::table('kuesioner_monitorings', function (Blueprint $table) {
+            $table->foreignId('monitoring_id')->constrained();
+            $table->foreignId('kuesioner_id')->constrained();
+            $table->foreignId('jawaban_kuesioner_id')->constrained();
             $table->foreignId('created_by');
             $table->foreignId('edited_by');
-            $table->timestamps();
         });
     }
 
@@ -29,6 +29,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foto_bts');
+        Schema::table('kuesioner_monitorings', function (Blueprint $table) {
+            //
+        });
     }
 };

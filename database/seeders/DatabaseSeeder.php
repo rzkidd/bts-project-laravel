@@ -29,13 +29,8 @@ class DatabaseSeeder extends Seeder
         ]);
         
         User::factory(5)->create();
-
-        Bts::factory(10)->create();
-        Monitoring::factory(12)->create();
-        FotoBts::factory(5)->create();
         Pemilik::factory(10)->create();
         Wilayah::factory(15)->create();
-
         KondisiBts::create([
             'nama' => 'Baik',
             'created_by' => mt_rand(1, 5),
@@ -67,5 +62,11 @@ class DatabaseSeeder extends Seeder
             'created_by' => mt_rand(1, 5),
             'edited_by' => mt_rand(1, 5),
         ]);
+
+        Bts::factory(10)->create();
+        Monitoring::factory(12)->create();
+        // FotoBts::factory(5)->create();
+
+        
     }
 }

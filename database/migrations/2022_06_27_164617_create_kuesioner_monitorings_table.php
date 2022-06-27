@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('recent_activities', function (Blueprint $table) {
+        Schema::create('kuesioner_monitorings', function (Blueprint $table) {
             $table->id();
-            $table->string('action');
-            $table->string('object');
-            $table->timestamp('at');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recent_activities');
+        Schema::dropIfExists('kuesioner_monitorings');
     }
 };

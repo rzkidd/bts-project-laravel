@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('recent_activities', function (Blueprint $table) {
-            $table->id();
-            $table->string('action');
-            $table->string('object');
-            $table->timestamp('at');
+        Schema::table('foto_bts', function (Blueprint $table) {
+            $table->foreignId('bts_id')->constrained();
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recent_activities');
+        Schema::table('foto_bts', function (Blueprint $table) {
+            //
+        });
     }
 };

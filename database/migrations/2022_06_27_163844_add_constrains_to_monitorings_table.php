@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('bts', function (Blueprint $table) {
-            $table->foreignId('pemilik_id')->constrained('pemiliks');
+        Schema::table('monitorings', function (Blueprint $table) {
+            $table->foreignId('kondisi_bts_id')->constrained();
+            $table->foreignId('user_surveyor_id')->constrained('users');
+            $table->foreignId('created_by');
+            $table->foreignId('edited_by');
+            $table->foreignId('bts_id')->constrained();
         });
     }
 
@@ -25,7 +29,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('bts', function (Blueprint $table) {
+        Schema::table('monitorings', function (Blueprint $table) {
             //
         });
     }

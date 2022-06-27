@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('login_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            
             $table->boolean('is_online')->default(false);
             $table->timestamps();
         });

@@ -16,13 +16,9 @@ return new class extends Migration
         Schema::create('monitorings', function (Blueprint $table) {
             $table->id();
             $table->year('tahun');
-            $table->foreignId('bts_id');
             $table->timestamp('tgl_generate');
             $table->date('tgl_kunjungan')->nullable();
-            $table->foreignId('kondisi_bts_id');
-            $table->foreignId('user_surveyor_id');
-            $table->foreignId('created_by');
-            $table->foreignId('edited_by');
+            
             $table->timestamps();
         });
     }

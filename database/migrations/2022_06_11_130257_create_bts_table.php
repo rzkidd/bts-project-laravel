@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->text('alamat');
-            $table->foreignId('jenis_bts_id');
             $table->string('latitude');
             $table->string('longitude');
             $table->integer('tinggi_tower');
@@ -25,10 +24,6 @@ return new class extends Migration
             $table->integer('lebar_tanah');
             $table->boolean('ada_genset');
             $table->boolean('ada_tembok_batas');
-            // $table->foreignId('pemilik_id');
-            $table->foreignId('wilayah_id');
-            $table->foreignId('created_by');
-            $table->foreignId('edited_by');
             $table->timestamps();
         });
     }
