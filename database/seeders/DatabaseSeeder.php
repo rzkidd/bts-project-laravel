@@ -5,10 +5,12 @@ namespace Database\Seeders;
 use App\Models\Bts;
 use App\Models\User;
 use App\Models\FotoBts;
+use App\Models\JawabanKuesioner;
 use App\Models\Pemilik;
 use App\Models\Wilayah;
 use App\Models\JenisBts;
 use App\Models\KondisiBts;
+use App\Models\Kuesioner;
 use App\Models\Monitoring;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -32,6 +34,46 @@ class DatabaseSeeder extends Seeder
         User::factory(5)->create();
         Pemilik::factory(10)->create();
         Wilayah::factory(15)->create();
+        Kuesioner::create([
+            'pertanyaan' => 'Bagaimana fungsionalitas BTS?',
+            'created_by' => 1,
+            'edited_by' => 1,
+        ]);
+        Kuesioner::create([
+            'pertanyaan' => 'Bagaimana kondisi BTS?',
+            'created_by' => 1,
+            'edited_by' => 1,
+        ]);
+        Kuesioner::create([
+            'pertanyaan' => 'Bagaimana kondisi sekitar BTS?',
+            'created_by' => 1,
+            'edited_by' => 1,
+        ]);
+        Kuesioner::create([
+            'pertanyaan' => 'Apakah kondisi kabel pada BTS baik?',
+            'created_by' => 1,
+            'edited_by' => 1,
+        ]);
+        Kuesioner::create([
+            'pertanyaan' => 'Apakah BTS mengalami gangguan teknis?',
+            'created_by' => 1,
+            'edited_by' => 1,
+        ]);
+        JawabanKuesioner::create([
+            'nama' => 'Baik',
+            'created_by' => 1,
+            'edited_by' => 1,
+        ]);
+        JawabanKuesioner::create([
+            'nama' => 'Sedang',
+            'created_by' => 1,
+            'edited_by' => 1,
+        ]);
+        JawabanKuesioner::create([
+            'nama' => 'Buruk',
+            'created_by' => 1,
+            'edited_by' => 1,
+        ]);
         KondisiBts::create([
             'nama' => 'Baik',
             'created_by' => mt_rand(1, 5),
