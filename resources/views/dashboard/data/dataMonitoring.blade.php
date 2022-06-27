@@ -71,7 +71,7 @@
                           @method('delete')
                           <button type="submit" class="btn btn-danger btn-sm me-3" onclick="return confirm('Anda yakin?');"><i class="bi-trash"></i></button>
                         </form>
-                        <a href="#" class="btn btn-success btn-sm "><i class="bi-arrow-right"></i></a>
+                        <a href="/v/monitoring/{{ $monitoring->id }}/pertanyaan" class="btn btn-success btn-sm "><i class="bi-arrow-right"></i></a>
                     </td>
                   </tr>
                 @endforeach
