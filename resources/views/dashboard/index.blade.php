@@ -40,7 +40,7 @@
 
             <div class="row mt-3">
                 <div class="col-md-4 me-3">
-                    <div class="card">
+                    <div class="card" style="min-height: 447px; max-height: 447px">
                         <div class="card-header bg-info fw-bold">
                             Recent Activity
                         </div>

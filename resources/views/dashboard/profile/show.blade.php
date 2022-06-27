@@ -23,6 +23,10 @@
         <form action="" class="form-group col-md-9 my-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control disabled" value="{{ $profile->email }}" disabled>
+            <label for="" class="form-label">Alamat</label>
+            <textarea type="text" class="form-control disabled" disabled>{{ $profile->alamat }}</textarea>
+            <label for="" class="form-label">No Hp</label>
+            <input type="text" class="form-control disabled" value="{{ $profile->no_hp }}" disabled>
         </form>
     </div>
 @endsection

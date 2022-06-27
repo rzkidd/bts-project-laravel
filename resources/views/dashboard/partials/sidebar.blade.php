@@ -23,6 +23,7 @@
                         <div class="accordion-body bg-dark d-flex flex-column">
                             <a class="text-white text-decoration-none border-bottom pb-2 mb-2" href="/bts">Data BTS</a>
                             <a class="text-white text-decoration-none border-bottom pb-2 mb-2" href="/operator">Data Operator</a>
+                            <a class="text-white text-decoration-none border-bottom pb-2 mb-2" href="/user">Data User</a>
                             <a class="text-white text-decoration-none border-bottom pb-2 mb-2" href="/monitoring">Data Monitoring</a>
                         </div>
                     </div>

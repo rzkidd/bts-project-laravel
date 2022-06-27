@@ -52,4 +52,10 @@ class ApiController extends Controller
         // $result = DB::select("select * from bts left join foto_bts on bts.id = foto_bts.bts_id inner join pemiliks on bts.pemilik_id = pemiliks.id where bts.id = $request->id");
         return response()->json($result);
     }
+
+    public function user(Request $request)
+    {
+        $result = DB::select("select * from users where id = $request->id");
+        return response()->json($result);
+    }
 }

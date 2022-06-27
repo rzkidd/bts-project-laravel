@@ -148,8 +148,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'jawaban*' => [
+            'required' => 'This field is required.',
         ],
     ],
 

@@ -20,4 +20,9 @@ class JawabanKuesioner extends Model
     {
         return $this->belongsTo(User::class, 'edited_by');
     }
+
+    public function kuesioner_monitoring()
+    {
+        return $this->hasMany(KuesionerMonitoring::class, 'jawaban_kuesioner_id');
+    }
 }

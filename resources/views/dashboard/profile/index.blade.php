@@ -29,7 +29,7 @@
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control disabled" value="{{ auth()->user()->email }}" disabled>
             <label for="" class="form-label">Alamat</label>
-            <input type="text" class="form-control disabled" value="{{ auth()->user()->alamat }}" disabled>
+            <textarea type="text" class="form-control disabled" disabled>{{ auth()->user()->alamat }}</textarea>
             <label for="" class="form-label">No Hp</label>
             <input type="text" class="form-control disabled" value="{{ auth()->user()->no_hp }}" disabled>
         </form>

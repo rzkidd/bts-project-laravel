@@ -1,16 +1,23 @@
 @extends('layouts.main')
 
 @section('container')
-    <header class="masthead text-center text-white" >
-        <div class="bg-circle-3 bg-circle"></div>
-        <div class="bg-circle-4 bg-circle"></div>
+    <!-- Header-->
+    <header class="py-5">
+        <div class="container px-lg-5">
+            <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+                <div class="m-4 m-lg-5">
+                    <h1 class="display-5 fw-bold">BTS</h1>
+                    <p class="fs-4">Sudah banyak BTS yang terdaftar dalam aplikasi kami. Berikut ini adalah daftarnya.</p>
+                </div>
+            </div>
+        </div>
     </header>
-    <div class="mt-5">
-        <div>
+    <div class="mt-3">
+        {{-- <div>
             <h2 style="text-align: center; margin-bottom: 2rem">
                 Data BTS
             </h2>
-        </div>
+        </div> --}}
         <div class="col-md-10 mx-auto mb-5 pb-3">
             <table class="table table-striped" id="table">
                 <thead>

@@ -26,7 +26,7 @@
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control mb-2" value="{{ auth()->user()->email }}" name="email">
             <label for="alamat" class="form-label">Alamat</label>
-            <input type="text" class="form-control mb-2" value="{{ auth()->user()->alamat }}" name="alamat">
+            <textarea type="text" class="form-control mb-2" value="{{ auth()->user()->alamat }}" name="alamat">{{ auth()->user()->alamat }}</textarea>
             <label for="no_hp" class="form-label">No Hp</label>
             <input type="text" class="form-control mb-2" value="{{ auth()->user()->no_hp }}" name="no_hp">
             <button type="submit" class="btn btn-primary mb-2">Update</button>

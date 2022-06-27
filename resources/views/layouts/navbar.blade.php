@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom {{ Request::is('/') ? 'fixed-top' : 'sticky-top' }}" >
     <div class="container px-5">
         <a class="navbar-brand" href="/">HOME</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -7,7 +7,7 @@
                 <a class="nav-link {{ Request::is('v/bts') ? 'active' : '' }}" href="/v/bts">BTS</a>
                 <a class="nav-link {{ Request::is('v/maps') ? 'active' : '' }}" href="/v/maps">Maps</a>
                 @can('surveyor')
-                    <a class="nav-link {{ Request::is('v/kuesioner') ? 'active' : '' }}" href="/v/kuesioner">Kuesioner</a>
+                    <a class="nav-link {{ Request::is('v/monitoring') ? 'active' : '' }}" href="/v/monitoring">Monitoring</a>
                 @endcan
             </div>
             @auth

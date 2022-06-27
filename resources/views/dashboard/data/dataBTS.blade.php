@@ -9,9 +9,9 @@
         </div>
 
         <!-- Tambahin disini.... -->
-        <div class = "ps-3 bg-white col-md-10 rounded" >
+        <div class = "ps-3 pt-3 bg-white col-md-10 rounded" >
             @if (session()->has('success'))
-                <div class="alert alert-success my-3">{{ session('success') }}</div>
+                <div class="alert alert-success my-3 me-3">{{ session('success') }}</div>
             @endif
             
             <div class="d-flex align-items-center">
@@ -23,9 +23,9 @@
                 <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#myModal" ><i class="bi-plus-square-fill"></i> 
                 Tambah Data 
                 </button>
-                <button type="button" class="btn btn-danger me-3" ><i class="bi-file-pdf"></i> PDF </button>
+                {{-- <button type="button" class="btn btn-danger me-3" ><i class="bi-file-pdf"></i> PDF </button>
                     </button>
-                <button type="button" class="btn btn-success me-3" ><i class="bi-file-excel"></i> Excel </button>
+                <button type="button" class="btn btn-success me-3" ><i class="bi-file-excel"></i> Excel </button> --}}
             <div>
             <div class="mt-3 pb-5 me-2">
                 <table class="table table-striped" id="table">

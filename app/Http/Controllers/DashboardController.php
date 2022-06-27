@@ -49,7 +49,7 @@ class DashboardController extends Controller
     public function operator()
     {
         return view('dashboard.data.dataOperator', [
-            'data_operator' => User::all()
+            'data_operator' => User::where('role', 'surveyor')->get()
         ]);
     }
     
@@ -82,6 +82,13 @@ class DashboardController extends Controller
         return view('dashboard.kuesioner.index', [
             'kuesioners' => Kuesioner::all(),
             'jawabans' => JawabanKuesioner::all()
+        ]);
+    }
+    
+    public function user()
+    {
+        return view('dashboard.data.dataOperator', [
+            'data_operator' => User::all()
         ]);
     }
 }

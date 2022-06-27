@@ -16,8 +16,16 @@
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
         {{-- CSS --}}
         <link rel="stylesheet" href="{{ asset('css/viewdataBTS.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/styles_.css') }}">
         {{-- DataTables --}}
         <link rel="stylesheet" type="text/css" href="{{ asset('js/DataTables/datatables.min.css') }}"/>
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        {{-- JQuery --}}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {{-- GMaps.js --}}
+        <script src="{{ asset('js/gmaps.min.js') }}"></script>
+        <script src="http://maps.google.com/maps/api/js"></script>
         
     </head>
     <body id="page-top">
@@ -36,9 +44,8 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        {{-- JQuery --}}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="{{ asset('js/scripts.js') }}"></script>
+        
         <script type="text/javascript" src="{{ asset('js/DataTables/datatables.min.js') }}"></script>
 
         

@@ -65,20 +65,42 @@ class DashboardProfileController extends Controller
         return redirect('/profile')->with('success', 'Password has been updated!');
     }
 
-    public function destroy(User $operator)
+    public function destroy(User $user)
     {
         // Record activity
-        $id = DB::select("select name from users where id = $operator->id");
+        $id = DB::select("select name from users where id = $user->id");
         $activity = [
             'user_id' => auth()->user()->id,
-            'action' => 'edit',
-            'object' => 'monitoring on ' . $id[0]->name
+            'action' => 'delete',
+            'object' => 'user ' . $id[0]->name
         ];
 
         RecentActivity::create($activity);
         
-        User::destroy($operator->id);
+        User::destroy($user->id);
 
-        return redirect('/operator');
+        return redirect()->back()->with('success', 'User berhasil dihapus!');
+    }
+
+    public function edit_user(User $user, Request $request)
+    {
+        $validatedData = $request->validate([
+            'role' => 'required'
+        ]);
+
+        User::where('id', $user->id)
+                ->update($validatedData);
+
+        // Record activity
+        $id = DB::select("select name from users where id = $user->id");
+        $activity = [
+            'user_id' => auth()->user()->id,
+            'action' => 'edit',
+            'object' => 'user ' . $id[0]->name
+        ];
+
+        RecentActivity::create($activity);
+
+        return redirect()->back()->with('success', 'User berhasil diupdate!');
     }
 }
