@@ -52,7 +52,7 @@
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(0px, -34px, 0px);" data-popper-placement="top-start">
                 <li><a class="dropdown-item" href="/profile">Profile</a></li>
                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="/profile/change-password">Change Password</a></li>
+                <li><a class="dropdown-item" href="/profile/{{ auth()->user()->id }}/change-password">Change Password</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                     <form action="/logout" method="post">

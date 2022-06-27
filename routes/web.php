@@ -8,6 +8,7 @@ use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\BtsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\DashboardController;
@@ -37,6 +38,8 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/signup', [SignupController::class, 'index']);
 Route::post('/signup', [SignupController::class, 'register']);
 
+Route::get('/v/bts', [LandingpageController::class, 'view_bts']);
+
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', [DashboardController::class, 'index']);
     Route::get('/bts', [DashboardController::class, 'bts']);
@@ -47,10 +50,11 @@ Route::middleware(['admin'])->group(function () {
 
     // Profile
     Route::get('/profile/{profile:id}', [DashboardProfileController::class, 'show']);
-    Route::get('/profile/edit', [DashboardProfileController::class, 'edit']);
-    Route::post('/profile/edit', [DashboardProfileController::class, 'update_profile']);
-    Route::get('/profile/change-password', [DashboardProfileController::class, 'change_password']);
-    Route::post('/profile/change-password', [DashboardProfileController::class, 'update_password']);
+    Route::get('/profile/{profile:id}/edit', [DashboardProfileController::class, 'edit']);
+    Route::post('/profile/{profile:id}/edit', [DashboardProfileController::class, 'update_profile']);
+    Route::get('/profile/{profile:id}/change-password', [DashboardProfileController::class, 'change_password']);
+    Route::post('/profile/{profile:id}/change-password', [DashboardProfileController::class, 'update_password']);
+    Route::delete('/user/{operator}', [DashboardProfileController::class, 'destroy']);
 
     // crud monitoring
     Route::resource('/monitoring', MonitoringController::class)->except('update');
@@ -88,11 +92,15 @@ Route::middleware(['admin'])->group(function () {
     Route::put('/jawabankuesioner/{jawabankuesioner:id}', [JawabanKuesionerController::class, 'update']);
     Route::delete('/jawabankuesioner/{jawabankuesioner:id}', [JawabanKuesionerController::class, 'destroy']);
 
+    // CRUD BTS
+    Route::resource('/bts', BtsController::class)->except('index');
+
     // API
     Route::get('/api/chart', [ApiController::class, 'chart']);
     Route::get('/api/monitoring/{id}', [ApiController::class, 'monitoring_data']);
     Route::get('/api/kuesioner/{id}', [ApiController::class, 'kuesioner_data']);
     Route::get('/api/jawabankuesioner/{id}', [ApiController::class, 'jawaban_kuesioner_data']);
     Route::get('/api/locations', [ApiController::class, 'locations']);
+    Route::get('/api/bts/{id}', [ApiController::class, 'bts']);
 
 });

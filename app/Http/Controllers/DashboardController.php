@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bts;
+use App\Models\User;
+use App\Models\Pemilik;
+use App\Models\Wilayah;
+use App\Models\JenisBts;
 use App\Models\LoginLog;
 use App\Models\Kuesioner;
 use App\Models\Monitoring;
@@ -35,13 +39,18 @@ class DashboardController extends Controller
     public function bts()
     {
         return view('dashboard.data.dataBTS', [
-            'data_bts' => Bts::all()
+            'data_bts' => Bts::latest()->get(),
+            'data_pemilik' => Pemilik::all(),
+            'data_jenis' => JenisBts::all(),
+            'data_wilayah' => Wilayah::all(),
         ]);
     }
 
     public function operator()
     {
-        return view('dashboard.data.dataOperator');
+        return view('dashboard.data.dataOperator', [
+            'data_operator' => User::all()
+        ]);
     }
     
     public function monitoring(Request $request)

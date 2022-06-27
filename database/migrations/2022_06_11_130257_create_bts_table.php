@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('lebar_tanah');
             $table->boolean('ada_genset');
             $table->boolean('ada_tembok_batas');
-            $table->foreignId('pemilik_id');
+            // $table->foreignId('pemilik_id');
             $table->foreignId('wilayah_id');
             $table->foreignId('created_by');
             $table->foreignId('edited_by');

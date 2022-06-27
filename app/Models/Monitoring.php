@@ -11,8 +11,6 @@ class Monitoring extends Model
 
     protected $guarded = [
         'id',
-        'created_by',
-        'edited_by'
     ];
 
     public function bts()

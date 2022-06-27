@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\RecentActivity;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class DashboardProfileController extends Controller
 {
@@ -19,19 +22,21 @@ class DashboardProfileController extends Controller
         ]);
     }
 
-    public function edit()
+    public function edit(User $profile)
     {
         return view('dashboard.profile.edit');
     }
 
-    public function update_profile(Request $request)
+    public function update_profile(Request $request, User $profile)
     {
         $validatedData = $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|email',
+            'alamat' => 'required|max:255',
+            'no_hp' => 'required',
         ]);
 
-        User::where('id', auth()->user()->id)
+        User::where('id', $profile->id)
                 ->update($validatedData);
 
         return redirect('/profile')->with('success', 'Profile has been updated!');
@@ -58,5 +63,22 @@ class DashboardProfileController extends Controller
                 ->update($toUpdate);
 
         return redirect('/profile')->with('success', 'Password has been updated!');
+    }
+
+    public function destroy(User $operator)
+    {
+        // Record activity
+        $id = DB::select("select name from users where id = $operator->id");
+        $activity = [
+            'user_id' => auth()->user()->id,
+            'action' => 'edit',
+            'object' => 'monitoring on ' . $id[0]->name
+        ];
+
+        RecentActivity::create($activity);
+        
+        User::destroy($operator->id);
+
+        return redirect('/operator');
     }
 }

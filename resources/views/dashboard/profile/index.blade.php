@@ -28,7 +28,11 @@
         <form action="" class="form-group col-md-9 my-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control disabled" value="{{ auth()->user()->email }}" disabled>
+            <label for="" class="form-label">Alamat</label>
+            <input type="text" class="form-control disabled" value="{{ auth()->user()->alamat }}" disabled>
+            <label for="" class="form-label">No Hp</label>
+            <input type="text" class="form-control disabled" value="{{ auth()->user()->no_hp }}" disabled>
         </form>
-        <a href="/profile/edit" class="btn btn-primary">Edit Profile</a>
+        <a href="/profile/{{ auth()->user()->id }}/edit" class="btn btn-primary">Edit Profile</a>
     </div>
 @endsection

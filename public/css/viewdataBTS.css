@@ -3,12 +3,12 @@
 
 .body
 {
-	background: rgb(102, 133, 236);
+	background: hsl(65, 91%, 92%);
 }
 
 .navigasi
 {
-	background: rgb(141, 112, 223);
+	background: hsl(27, 62%, 74%);
 	padding: 20px;
 }
 
@@ -16,7 +16,19 @@
 {
 	display: inline;
 	padding: 8px;
-	background-color: rgb(141, 112, 223);
+	background-color: hsl(38, 57%, 76%);
+}
+
+.pilihannavigasi a{
+	text-decoration: none;
+	background-color: #B09B71;
+	padding: 3px;
+	color: black;
+}
+
+.pilihannavigasi a:hover{
+	background-color: white;
+	color: black;
 }
 
 table

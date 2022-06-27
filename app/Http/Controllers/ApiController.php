@@ -37,4 +37,19 @@ class ApiController extends Controller
         $location = DB::select('select nama, alamat, latitude, longitude from bts');
         return response()->json($location);
     }
+
+    public function bts(Request $request)
+    {
+        $result = DB::select(
+            "select bts.nama as nama, bts.alamat, latitude, longitude, tinggi_tower, panjang_tanah, lebar_tanah, jenis_bts_id, jenis_bts.nama as jenis_bts, pemilik_id, pemiliks.nama as nama_pemilik, wilayah_id, wilayahs.nama as nama_wilayah, ada_genset, ada_tembok_batas, foto_bts.path_foto 
+            from bts 
+            left join foto_bts on bts.id = foto_bts.bts_id 
+            inner join pemiliks on bts.pemilik_id = pemiliks.id 
+            inner join wilayahs on bts.wilayah_id = wilayahs.id
+            inner join jenis_bts on bts.jenis_bts_id = jenis_bts.id
+            where bts.id = $request->id"
+        );
+        // $result = DB::select("select * from bts left join foto_bts on bts.id = foto_bts.bts_id inner join pemiliks on bts.pemilik_id = pemiliks.id where bts.id = $request->id");
+        return response()->json($result);
+    }
 }
