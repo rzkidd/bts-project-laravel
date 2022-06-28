@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('monitorings', function (Blueprint $table) {
-            $table->foreignId('kondisi_bts_id')->nullable()->constrained();
+            $table->foreignId('kondisi_bts_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('user_surveyor_id')->constrained('users');
             $table->foreignId('created_by');
             $table->foreignId('edited_by');

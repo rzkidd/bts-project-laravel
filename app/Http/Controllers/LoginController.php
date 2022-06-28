@@ -40,9 +40,9 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        // $log = LoginLog::latest()->where('user_id', auth()->user()->id)->get();
-        // $log[0]->is_online = false;
-        // $log[0]->save();
+        $log = LoginLog::latest()->where('user_id', auth()->user()->id)->get();
+        $log[0]->is_online = false;
+        $log[0]->save();
 
         Auth::logout();
         $request->session()->invalidate();
